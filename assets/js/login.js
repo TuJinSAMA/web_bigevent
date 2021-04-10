@@ -22,4 +22,24 @@ $(function () {
             }
         }
     });
+
+    //注册
+    $('.regUser').on('submit', function (e) {
+        e.preventDefault();
+        const data = $('.regUser').serialize();
+        $.ajax({
+            type: 'POST',
+            url: baseUrl + '/api/reguser',
+            data: data,
+            success: res => {
+                if (res.status !== 0) {
+                    return console.log(res.message);
+                } else {
+                    console.log(res.message);
+                }
+
+            }
+        })
+    });
+
 })
