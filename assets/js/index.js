@@ -6,6 +6,7 @@ $(function () {
 
 
 
+    //初始化页面函数
     function initPage() {
         //获取用户基本信息
         $.ajax({
@@ -19,6 +20,7 @@ $(function () {
             }
         });
     }
+    //初始化用户信息
     function initUserinfo(data) {
         if (data.user_pic) {
             $('.text-avatar').hide();
