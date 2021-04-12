@@ -4,9 +4,9 @@ $.ajaxPrefilter(function (options) {
         options.headers = {
             Authorization: localStorage.token || ''
         };
-        options.complete = function ({ responseJSON: { status } }) {
+        options.complete = function ({ responseJSON: { status, message } }) {
             // console.log(res.responseJSON);
-            if (status !== 0) {
+            if (status === 1 && message === '身份认证失败！') {
                 localStorage.removeItem('token');
                 location.href = './../../login.html';
             }
