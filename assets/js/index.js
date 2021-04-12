@@ -11,33 +11,30 @@ $(function () {
             layer.close(index);
         });
     });
-
-
-
-
-    //初始化页面函数
-    function initPage() {
-        //获取用户基本信息
-        $.ajax({
-            type: "GET",
-            url: '/my/userinfo',
-            success: res => {
-                if (res.status !== 0) return;
-                initUserinfo(res.data);
-            }
-        });
-    }
-    //初始化用户信息
-    function initUserinfo(data) {
-        console.log(data);
-        const username = data.nickname || data.username;
-        if (data.user_pic) {
-            $('.text-avatar').hide();
-            $('.portrait').attr('src', data.user_pic);
-        } else {
-            $('.portrait').hide();
-            $('.text-avatar').html(username[0].toUpperCase());
-        }
-        $('#welcome').html(`欢迎 ${username}`);
-    }
 });
+
+//初始化页面函数
+function initPage() {
+    //获取用户基本信息
+    $.ajax({
+        type: "GET",
+        url: '/my/userinfo',
+        success: res => {
+            if (res.status !== 0) return;
+            initUserinfo(res.data);
+        }
+    });
+}
+//初始化用户信息
+function initUserinfo(data) {
+    console.log(data);
+    const username = data.nickname || data.username;
+    if (data.user_pic) {
+        $('.text-avatar').hide();
+        $('.portrait').attr('src', data.user_pic);
+    } else {
+        $('.portrait').hide();
+        $('.text-avatar').html(username[0].toUpperCase());
+    }
+    $('#welcome').html(`欢迎 ${username}`);
+}
