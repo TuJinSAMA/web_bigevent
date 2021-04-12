@@ -18,10 +18,6 @@ $(function () {
         e.preventDefault();
         changePwd();
     });
-    $('#resetBtn').on('click', function (e) {
-        e.preventDefault();
-        $('.changePwd [type=password]').val('');
-    });
 });
 
 //修改密码函数
