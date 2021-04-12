@@ -7,12 +7,8 @@ $.ajaxPrefilter(function (options) {
         options.complete = function (res) {
             // console.log(res.responseJSON);
             if (res.responseJSON.status !== 0) {
-                const { layer } = layui;
-                layer.msg(res.responseJSON.message);
                 localStorage.removeItem('token');
-                setTimeout(function () {
-                    location.href = './../../login.html';
-                }, 1000);
+                location.href = './../../login.html';
             }
         }
     }
