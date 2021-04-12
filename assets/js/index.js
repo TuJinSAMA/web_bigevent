@@ -20,14 +20,13 @@ function initPage() {
         type: "GET",
         url: '/my/userinfo',
         success: res => {
-            if (res.status !== 0) return;
+            if (res.status !== 0) return layui.layer.msg(res.message);
             initUserinfo(res.data);
         }
     });
 }
 //初始化用户信息
 function initUserinfo(data) {
-    console.log(data);
     const username = data.nickname || data.username;
     if (data.user_pic) {
         $('.text-avatar').hide();
