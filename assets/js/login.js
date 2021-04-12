@@ -1,6 +1,6 @@
 $(function () {
     // const baseUrl = 'http://ajax.frontend.itheima.net';
-    const baseUrl = 'http://api-breakingnews-web.itheima.net';
+    // const baseUrl = 'http://api-breakingnews-web.itheima.net';
     //去注册页面的点击事件
     $('#link_reg').on('click', function () {
         $('.login_box').hide();
@@ -22,7 +22,6 @@ $(function () {
             }
         }
     });
-
     //注册
     $('.regUser').on('submit', function (e) {
         e.preventDefault();
