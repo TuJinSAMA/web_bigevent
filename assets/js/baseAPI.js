@@ -4,9 +4,9 @@ $.ajaxPrefilter(function (options) {
         options.headers = {
             Authorization: localStorage.token || ''
         };
-        options.complete = function (res) {
+        options.complete = function ({ responseJSON: { status } }) {
             // console.log(res.responseJSON);
-            if (res.responseJSON.status !== 0) {
+            if (status !== 0) {
                 localStorage.removeItem('token');
                 location.href = './../../login.html';
             }
