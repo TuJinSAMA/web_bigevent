@@ -11,9 +11,8 @@ $(function () {
         $('.reg_box').hide();
         $('.login_box').show();
     });
-    // 解构赋值 将layui对象中的form抽离出来
-    const { form } = layui;
-    const { layer } = layui;
+    // 解构赋值 将layui对象中的form、layer抽离出来
+    const { form, layer } = layui;
     form.verify({
         pwd: [/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格!'],
         repwd: function (value) {
