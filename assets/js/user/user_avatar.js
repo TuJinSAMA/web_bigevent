@@ -21,7 +21,23 @@ $(function () {
         $image.cropper('destroy').attr('src', imgUrl).cropper(options);
     })
     $('.changeBtn').on('click', function () {
-        console.log(1);
-    });
+        const dataUrl = $image.cropper('getCroppedCanvas', {
+            width: 100,
+            height: 100
+        }).toDataURL('image/png');
+        changePortrait(dataUrl);
 
+    });
+    function changePortrait(data) {
+        $.ajax({
+            type: 'POST',
+            url: '/my/update/avatar',
+            data: { avatar: data },
+            success: res => {
+                if (res.status !== 0) return layui.layer.msg(res.message);
+                layui.layer.msg(res.message);
+                window.parent.initPage();
+            }
+        })
+    }
 })
