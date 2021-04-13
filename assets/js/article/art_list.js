@@ -40,7 +40,7 @@ $(function () {
                 if (res.status) return layui.layer.msg(res.message);
                 const htmlStr = template('tpl-table', res);
                 $('#artList').html(htmlStr);
-                renderPage(res.total)
+                renderPage(res.total);
             }
         })
     }
@@ -65,13 +65,13 @@ $(function () {
             curr: queryObj.pagenum, // 设置默认被选中的分页
             layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],
             limits: [2, 3, 5, 10],
+            //当点击了页码 则触发jump事件
             jump: function (obj, first) {
                 //obj包含了当前分页的所有参数，比如：
                 // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
                 // console.log(obj.limit); //得到每页显示的条数
                 queryObj.pagesize = obj.limit;
                 queryObj.pagenum = obj.curr;
-
                 //首次不执行
                 if (!first) {
                     initPage(queryObj);
@@ -86,13 +86,14 @@ $(function () {
             success: res => {
                 if (res.status) return layui.layer.msg(res.message);
                 layui.layer.msg(res.message);
+                if ($('.delArt').length === 1) {
+                    queryObj.pagenum = queryObj.pagenum === 1 ? 1 : queryObj.pagenum - 1;
+                }
                 initPage(queryObj);
             }
         });
     }
-})
-
-
+});
 function padZero(num) {
     return num < 10 ? '0' + num : num;
 }
