@@ -30,6 +30,11 @@ $(function () {
         const artId = $(this).attr('data-id');
         delArt(artId);
     });
+    $('#artList').on('click', '.editArt', function () {
+        const artId = $(this).attr('data-id');
+        location.href = './../../../article/art_edit.html?' + artId;
+        // getArtForId(artId);
+    });
 
     function initPage(data) {
         $.ajax({
@@ -92,6 +97,15 @@ $(function () {
                 initPage(queryObj);
             }
         });
+    }
+    function getArtForId(id) {
+        $.ajax({
+            method: 'GET',
+            url: '/my/article/' + id,
+            success: res => {
+                if (res.status) return layui.layer.msg(res.message);
+            }
+        })
     }
 });
 function padZero(num) {

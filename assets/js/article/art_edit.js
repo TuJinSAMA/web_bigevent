@@ -1,6 +1,8 @@
 $(function () {
     // 初始化富文本编辑器
     initEditor();
+    //初始化类别选项
+    renderCates();
     // 1. 初始化图片裁剪器
     const $image = $('#image');
     // 2. 裁剪选项
@@ -11,7 +13,9 @@ $(function () {
     let state = '';
     // 3. 初始化裁剪区域
     $image.cropper(options);
-    renderCates();
+    // 自动填写表单的值
+    initPage();
+
     $('#chooseCover').on('click', function () {
         $('#chooseImg').click();
     });
@@ -41,34 +45,49 @@ $(function () {
             // 5. 将文件对象，存储到 fd 中
             fd.append('cover_img', blob)
             // 6. 发起 ajax 数据请求
-            addArt(fd);
+            editArt(fd);
         })
     })
-});
 
-function renderCates() {
-    $.ajax({
-        method: 'GET',
-        url: '/my/article/cates',
-        success: res => {
-            if (res.status) return layui.layer.msg(res.message);
-            const htmlStr = template('catesOption', res);
-            $('[name=cate_id]').html(htmlStr);
-            layui.form.render();
-        }
-    })
-}
-function addArt(data) {
-    $.ajax({
-        method: 'POST',
-        url: '/my/article/add',
-        data: data,
-        contentType: false,
-        processData: false,
-        success: res => {
-            if (res.status) return layui.layer.msg(res.message);
-            layui.layer.msg(res.message);
-            location.href = './../../../article/art_list.html';
-        }
-    });
-}
+
+    function initPage() {
+        const id = location.search.slice(1);
+        $.ajax({
+            method: 'GET',
+            url: '/my/article/' + id,
+            success: res => {
+                if (res.status) return layui.layer.msg(res.message);
+                layui.form.val('form-edit', res.data);
+                const imgUrl = 'http://api-breakingnews-web.itheima.net' + res.data.cover_img;
+                $image.cropper('destroy').attr('src', imgUrl).cropper(options);
+            }
+        })
+    }
+    function renderCates() {
+        $.ajax({
+            method: 'GET',
+            url: '/my/article/cates',
+            success: res => {
+                if (res.status) return layui.layer.msg(res.message);
+                const htmlStr = template('catesOption', res);
+                $('[name=cate_id]').html(htmlStr);
+                layui.form.render();
+            }
+        })
+    }
+    function editArt(data) {
+        $.ajax({
+            method: 'POST',
+            url: '/my/article/edit',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: res => {
+                console.log(res);
+                if (res.status) return layui.layer.msg(res.message);
+                layui.layer.msg(res.message);
+                location.href = './../../../article/art_list.html';
+            }
+        })
+    }
+});
