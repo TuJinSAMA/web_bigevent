@@ -6,7 +6,6 @@ $(function () {
     }
     $image.cropper(options);
 
-
     $('.uploadImg').on('click', function () {
         $('#chooseImg').click();
     });
@@ -26,18 +25,17 @@ $(function () {
             height: 100
         }).toDataURL('image/png');
         changePortrait(dataUrl);
-
     });
-    function changePortrait(data) {
-        $.ajax({
-            type: 'POST',
-            url: '/my/update/avatar',
-            data: { avatar: data },
-            success: res => {
-                if (res.status !== 0) return layui.layer.msg(res.message);
-                layui.layer.msg(res.message);
-                window.parent.initPage();
-            }
-        })
-    }
 })
+function changePortrait(data) {
+    $.ajax({
+        type: 'POST',
+        url: '/my/update/avatar',
+        data: { avatar: data },
+        success: res => {
+            if (res.status !== 0) return layui.layer.msg(res.message);
+            layui.layer.msg(res.message);
+            window.parent.initPage();
+        }
+    })
+}
