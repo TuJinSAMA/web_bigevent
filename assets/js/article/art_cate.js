@@ -33,6 +33,7 @@ $(function () {
         layer.confirm('确定删除?', { icon: 3, title: '提示' }, function (index) {
             delCate(cateId);
             layer.close(index);
+            getCates();
         });
     });
 })
@@ -89,7 +90,6 @@ function delCate(id) {
         url: '/my/article/deletecate/' + id,
         success: res => {
             if (res.status) return layui.layer.msg(res.message);
-            getCates();
             layui.layer.msg(res.message);
         }
     });
