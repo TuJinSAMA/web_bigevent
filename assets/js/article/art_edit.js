@@ -10,17 +10,18 @@ $(function () {
         aspectRatio: 400 / 280,
         preview: '.img-preview'
     };
-    let state = '';
+    let state = '';//初始化一个状态参数 发布文章时表示文章的状态
     // 3. 初始化裁剪区域
     $image.cropper(options);
     // 自动填写表单的值
     initPage();
-
+    //给选择封面按钮添加点击事件
     $('#chooseCover').on('click', function () {
-        $('#chooseImg').click();
+        $('#chooseImg').click();//触发input:file的点击事件
     });
+    //监听input:file的change事件 当用户选择文件后触发
     $('#chooseImg').on('change', function (e) {
-        if (e.target.files.length <= 0) return layui.layer.msg('请选择图片！');
+        if (e.target.files.length <= 0) return layui.layer.msg('您未选择任何图片！');
         const [imgObj] = e.target.files;
         const imgUrl = URL.createObjectURL(imgObj);
         // 'destroy' 销毁当前裁剪区域
@@ -48,21 +49,23 @@ $(function () {
             editArt(fd);
         })
     })
-
-
+    //初始化页面 通过id获取要编辑的文章的内容
     function initPage() {
-        const id = location.search.slice(1);
+        const id = location.search.slice(1); //id通过url传递过来 
         $.ajax({
             method: 'GET',
             url: '/my/article/' + id,
             success: res => {
                 if (res.status) return layui.layer.msg(res.message);
-                layui.form.val('form-edit', res.data);
+                layui.form.val('form-edit', res.data); //自动填充表单的内容 
+                //返回值中封面的url必须拼接服务器地址才能正常显示
                 const imgUrl = 'http://api-breakingnews-web.itheima.net' + res.data.cover_img;
+                //将文章的封面应用在裁剪区域
                 $image.cropper('destroy').attr('src', imgUrl).cropper(options);
             }
         })
     }
+    //渲染文章类别
     function renderCates() {
         $.ajax({
             method: 'GET',
@@ -71,10 +74,11 @@ $(function () {
                 if (res.status) return layui.layer.msg(res.message);
                 const htmlStr = template('catesOption', res);
                 $('[name=cate_id]').html(htmlStr);
-                layui.form.render();
+                layui.form.render();//更新渲染layui的表单
             }
         })
     }
+    //通过id修改文章的函数
     function editArt(data) {
         $.ajax({
             method: 'POST',
@@ -86,6 +90,7 @@ $(function () {
                 console.log(res);
                 if (res.status) return layui.layer.msg(res.message);
                 layui.layer.msg(res.message);
+                //修改成功后返回文章列表页面
                 location.href = './../../../article/art_list.html';
             }
         })
