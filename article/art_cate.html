@@ -2,47 +2,47 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./../assets/lib/layui/css/layui.css" />
-    <link rel="stylesheet" href="./../assets/css/article/common.css">
-    <link rel="stylesheet" href="./../assets/css/article/art_cate.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./../assets/lib/layui/css/layui.css" />
+  <link rel="stylesheet" href="./../assets/css/article/common.css">
+  <link rel="stylesheet" href="./../assets/css/article/art_cate.css" />
 </head>
 
 <body>
-    <!-- 卡片区域 -->
-    <div class="layui-card">
-        <div class="layui-card-header">
-            <span>文章类别管理</span>
-            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="addCate">添加类别</button>
-        </div>
-        <div class="layui-card-body">
-            <table class="layui-table">
-                <colgroup>
-                    <col />
-                    <col />
-                    <col width="200" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>分类名称</th>
-                        <th>分类别名</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="tb_cates">
-
-                </tbody>
-            </table>
-        </div>
+  <!-- 卡片区域 -->
+  <div class="layui-card">
+    <div class="layui-card-header">
+      <span>文章类别管理</span>
+      <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="addCate">添加类别</button>
     </div>
-    <script src="./../assets/lib/layui/layui.all.js"></script>
-    <script src="./../assets/lib/jquery.js"></script>
-    <script src="./../assets/js/baseAPI.js"></script>
-    <script src="./../assets/lib/template-web.js"></script>
-    <!--  -->
-    <script type="text/html" id="tpl_table">
+    <div class="layui-card-body">
+      <table class="layui-table">
+        <colgroup>
+          <col />
+          <col />
+          <col width="200" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>分类名称</th>
+            <th>分类别名</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="tb_cates">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="./../assets/lib/layui/layui.all.js"></script>
+  <script src="./../assets/lib/jquery.js"></script>
+  <script src="./../assets/js/baseAPI.js"></script>
+  <script src="./../assets/lib/template-web.js"></script>
+  <!-- 模板引擎渲染分类列表 -->
+  <script type="text/html" id="tpl_table">
     {{each data item index}}
     <tr>
         <td>{{item.name}}</td>
@@ -54,8 +54,8 @@
     </tr>
     {{/each}}
     </script>
-    <!-- 添加类别的弹出层 -->
-    <script type="text/html" id="dialog-add">
+  <!-- 添加类别的弹出层 -->
+  <script type="text/html" id="dialog-add">
         <form class="layui-form" id="form-add">
           <div class="layui-form-item">
             <label class="layui-form-label">分类名称</label>
@@ -77,8 +77,8 @@
           </div>
         </form>
       </script>
-    <!-- 编辑类别的弹出层 -->
-    <script type="text/html" id="dialog-edit">
+  <!-- 编辑类别的弹出层 -->
+  <script type="text/html" id="dialog-edit">
         <form class="layui-form" id="form-edit" lay-filter="form-edit">
           <!-- 隐藏域，保存 Id 的值 -->
           <input type="hidden" name="Id">
@@ -101,7 +101,7 @@
           </div>
         </form>
       </script>
-    <script src="./../assets/js/article/art_cate.js"></script>
+  <script src="./../assets/js/article/art_cate.js"></script>
 </body>
 
 </html>
