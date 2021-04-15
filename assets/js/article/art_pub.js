@@ -34,7 +34,7 @@ $(function () {
     //监听发布文章表单的提交事件
     $('#addArt').on('submit', function (e) {
         e.preventDefault();
-        const fd = new FormData($(this)[0]); //创建此表单的FormData对象
+        const fd = new FormData(this); //创建此表单的FormData对象
         fd.append('state', state); //将文章的状态追加到FormData对象中
         //将裁剪好的封面图片 使用toBlob方法转化为文件对象
         $image.cropper('getCroppedCanvas', {
