@@ -35,7 +35,7 @@ $(function () {
     $('#addArt').on('submit', function (e) {
         e.preventDefault();
         const fd = new FormData($(this)[0]);
-        fd.append('state', state);
+        fd.set('state', state);
         $image.cropper('getCroppedCanvas', {
             // 创建一个 Canvas 画布
             width: 400,
@@ -59,7 +59,7 @@ $(function () {
                 if (res.status) return layui.layer.msg(res.message);
                 layui.form.val('form-edit', res.data); //自动填充表单的内容 
                 //返回值中封面的url必须拼接服务器地址才能正常显示
-                const imgUrl = 'http://api-breakingnews-web.itheima.net' + res.data.cover_img;
+                const imgUrl = 'http://127.0.0.1/' + res.data.cover_img;
                 //将文章的封面应用在裁剪区域
                 $image.cropper('destroy').attr('src', imgUrl).cropper(options);
             }
@@ -87,7 +87,6 @@ $(function () {
             contentType: false,
             processData: false,
             success: res => {
-                console.log(res);
                 if (res.status) return layui.layer.msg(res.message);
                 layui.layer.msg(res.message);
                 //修改成功后返回文章列表页面

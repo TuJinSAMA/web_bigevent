@@ -18,7 +18,7 @@
         <div class="layui-card-body">
             <!-- 发布文章的表单 -->
             <form class="layui-form" id="addArt" lay-filter="form-edit">
-                <input type="hidden" name="Id">
+                <input type="hidden" name="id">
                 <input type="hidden" name="is_delete">
                 <input type="hidden" name="pub_date">
                 <input type="hidden" name="state">
@@ -91,7 +91,7 @@
     <script type="text/html" id="catesOption">
         <option value="">请选择文章类别</option>
         {{each data item index}}
-        <option value="{{item.Id}}">{{item.name}}</option>
+        <option value="{{item.id}}">{{item.name}}</option>
         {{/each}}
     </script>
     <!-- 导入自己的 JS -->
